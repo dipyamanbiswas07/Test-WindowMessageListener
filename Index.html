@@ -1,0 +1,102 @@
+<html>
+  <body>
+    string <button onclick="sendMessage('string data type')">string</button>
+    <br> numeric <button onclick="sendMessage1(1234567890)">numeric</button>
+    <br> boolean <button onclick="sendComplexMessage(3)">boolean</button>
+    <br> array <button onclick="sendComplexMessage(1)">array</button>
+    <br> object <button onclick="sendComplexMessage(2)">object</button>
+    <br> nestedArray <button onclick="sendComplexMessage(4)">nestedArray</button>
+    
+    
+  <iframe id="frameEle" src="https://ee-2339.dp.appsmith.com/app/my-first-application-1/page1-651cf6f34a17e305f4dfffa1" style="height:500px;width:1000px;"></iframe>
+    <script>
+       
+   const frameEle = document.getElementById("frameEle");
+     function sendMessage(string) {
+       console.log("sending a string from Appsmith on an iFrame")
+       frameEle.contentWindow.postMessage(string, '*');
+   }
+    
+       function sendMessage1(numeric) {
+       console.log("sending a number from Appsmith on an iFrame")
+       frameEle.contentWindow.postMessage(numeric, '*');
+   }
+	    
+	function sendComplexMessage(type) {
+    let data = "data";
+    switch (type) {
+      case 1:
+        data = 
+          {
+            "label": "Blue",
+            "value": "BLUE"
+          },
+          {
+            "label": "Green",
+            "value": "GREEN"
+          },
+          {
+            "label": "Red",
+            "value": "RED"
+          }
+     ;
+	break;
+	case 2:
+        data = {
+    employeeName: "John Doe",
+    employeeId: 27,
+    salary: {
+        '2018-19': "400000INR",
+        '2019-20': "500000INR",
+        '2020-21': "650000INR"
+    },
+    address: {
+        locality: {
+            address1: "1600 pebble road",
+            address2: "Nearby XYZ Bank",
+        },
+        city: "Mumbai",
+        state: "Maharashtra",
+        country: "India"
+  	  }
+	};
+	break;
+	case 3:
+	    data = false;
+	break;
+	case 4:
+	data = {
+    "label": "Blue",
+    "value": "BLUE",
+    "children": [
+      {
+        "label": "Dark Blue",
+        "value": "DARK BLUE"
+      },
+      {
+        "label": "Light Blue",
+        "value": "LIGHT BLUE"
+      }
+    ]
+  },
+  {
+    "label": "Green",
+    "value": "GREEN"
+  },
+  {
+    "label": "Red",
+    "value": "RED"
+  };
+     break;
+   }
+     sendMessage(data);
+   } 
+	    
+	window.addEventListener('message', function (e) {
+      // Get the sent data
+      console.log("sending from switch statement", e);
+  });
+	    
+  </script>
+  </<body>
+</html>
